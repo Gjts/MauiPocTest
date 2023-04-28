@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Comm.Net.Service\Comm.Net.Service.csproj" />
+    <ProjectReference Include="..\Comm.Net.Utils\Comm.Net.Utils.csproj" />
+    <ProjectReference Include="..\IConversion\ITransformation.csproj" />
+  </ItemGroup>
+
+</Project>

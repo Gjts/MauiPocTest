@@ -1,0 +1,17 @@
+{
+  "profiles": {
+    "Windows Machine": {
+      "applicationHostConfig": {
+        "useSsl": false
+      },
+      "applicationUrl": "http://localhost:5000",
+      "commandName": "MsixPackage",
+      "dotnetRunMessages": "true",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "launchBrowser": true,
+      "nativeDebugging": false
+    }
+  }
+}

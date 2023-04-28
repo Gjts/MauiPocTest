@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             xmlns:vm ="clr-namespace:Comm.Net.ViewModels.Login;assembly=Comm.Net.ViewModels"
+             BindingContext="{vm:LoginViewModel}"
+             x:Class="MauiPocTest.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+            <Entry Text="{Binding UserName}" ></Entry>
+
+            <Entry Text="{Binding UserName }"/>
+
+            <Label Text="{Binding UserName}" />
+            <Button Text="Click Me!" Command="{Binding UserLoginCommand}"></Button>
+            <Button Text="Click" Clicked="Button_Clicked"></Button>
+            
+            <Button Text="Go to Page Two" Command="{Binding GoToPageTwoCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
