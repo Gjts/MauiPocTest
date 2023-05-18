@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net6.0;net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
@@ -19,13 +19,20 @@
 
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Comm.Net.Models\Comm.Net.Models.csproj" />
 	  <ProjectReference Include="..\Conversion\Transformation.csproj" />
 	  <ProjectReference Include="..\IConversion\ITransformation.csproj" />
+	  <ProjectReference Include="..\LocalStorage\LocalStorage.csproj" />
 	  <ProjectReference Include="..\MauiPocUnit\MauiPocUnit.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Inventory\PutAway\" />
+	  <Folder Include="Layout\" />
 	</ItemGroup>
 
 </Project>

@@ -11,9 +11,9 @@
             </ResourceDictionary.MergedDictionaries>
 
             <!--1.添加服务注册的命名空间-->
-            <!--<ResourceDictionary>
-                <local:UnitLocator x:Key="UnitLocator"></local:UnitLocator>
-            </ResourceDictionary>-->
+            <ResourceDictionary>
+                <local:StaticLocator x:Key="StaticLocator"></local:StaticLocator>
+            </ResourceDictionary>
             
         </ResourceDictionary>
     </Application.Resources>

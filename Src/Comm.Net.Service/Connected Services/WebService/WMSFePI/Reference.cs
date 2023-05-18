@@ -864,11 +864,11 @@ namespace WMSFePI
         {
             if ((endpointConfiguration == EndpointConfiguration.WMSFePISoap))
             {
-                return new System.ServiceModel.EndpointAddress("http://192.168.32.1:8066/WMSFePI.asmx");
+                return new System.ServiceModel.EndpointAddress("http://10.0.108.183:8066/WMSFePI.asmx");
             }
             if ((endpointConfiguration == EndpointConfiguration.WMSFePISoap12))
             {
-                return new System.ServiceModel.EndpointAddress("http://192.168.32.1:8066/WMSFePI.asmx");
+                return new System.ServiceModel.EndpointAddress("http://10.0.108.183:8066/WMSFePI.asmx");
             }
             throw new System.InvalidOperationException(string.Format("找不到名称为“{0}”的终结点。", endpointConfiguration));
         }

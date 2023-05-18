@@ -10,7 +10,7 @@ public class ServiceSingleton
     /// <summary>
     /// 延迟实例化 WMSFrontEndSoapTran 对象 Lazy 是线程安全的
     /// </summary>
-    private static readonly Lazy<IWMSFrontEndSoapTran<Login, UserInfo>> _lazyInstance = 
+    private static readonly Lazy<IWMSFrontEndSoapTran<Login, UserInfo>> _lazyInstance =
         new Lazy<IWMSFrontEndSoapTran<Login, UserInfo>>(() => new WMSFrontEndSoapTran());
 
     /// <summary>

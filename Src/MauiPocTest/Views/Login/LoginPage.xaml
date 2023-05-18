@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:y="clr-namespace:MauiPocTest.BaseModel"
+             xmlns:System="clr-namespace:System;assembly=netstandard"
              xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
              xmlns:vm ="clr-namespace:Comm.Net.ViewModels.Login;assembly=Comm.Net.ViewModels"
              x:Class="MauiPocTest.Views.Login.LoginPage"
@@ -12,35 +14,43 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="220"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
         <Path Stroke="#ffff"  Data="m0.30001,0l449,0l0,128.48327c-122.5,64.30167 -332.5,65.89076 -449,7.2429c0,-45.25313 0,-90.47304 0,-135.72617z" Fill="#2ECC71"/>
 
-        <StackLayout>
-            <Frame BackgroundColor="SkyBlue" HeightRequest="60" WidthRequest="60" CornerRadius="30" Padding="0" Margin="0,100,0,0" HorizontalOptions="Center">
-                <Image Source="https://www.findool.com/images/avatars/avatar.png" Aspect="AspectFill" Margin="0"/>
-            </Frame>
-        </StackLayout>
+        <Grid Grid.Row="0">
+            <StackLayout>
+                <Frame BackgroundColor="SkyBlue" HeightRequest="60" WidthRequest="60" CornerRadius="30" Padding="0" Margin="0,80,0,0" HorizontalOptions="Center">
+                    <Image Source="{x:Static y:Icons.Loginavatar}" Aspect="AspectFill" Margin="0"/>
+                </Frame>
+            </StackLayout>
+        </Grid>
 
-        <Grid RowSpacing="5" Grid.Row="1" Margin="20,20,20,0">
+        <Grid RowSpacing="5" Grid.Row="1" Margin="20,10,20,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="1" Text="Welcome!" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0" Margin="0"/>
-            <Label Grid.Row="2" Text="Sign in to continue" HorizontalOptions="Center" FontSize="Subtitle"/>
-
-            <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+            <StackLayout Grid.Row="0" Orientation="Vertical" HorizontalOptions="StartAndExpand" Margin="0,10,0,0">
+                <StackLayout Orientation="Horizontal" MaximumHeightRequest="30">
+                    <Frame Padding="0" Margin="5,-30,0,0">
+                        <Image Source="{x:Static y:Icons.Companylogo}" Aspect="AspectFill" Margin="0"/>
+                    </Frame>
+                    <StackLayout Orientation="Vertical" Margin="40,-15,0,0">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Version: "  TextColor="Black" FontSize="Small" Padding="0" />
+                            <Label Text="1.7"  TextColor="Black" FontSize="Small" Padding="0" />
+                        </StackLayout>
+                        <Label Text="{Binding Source={x:Static System:DateTime.Now}, StringFormat='{0:yyyy-MM-dd}'}"  TextColor="Black" FontSize="Small" Padding="0" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Grid.Row="1" Orientation="Vertical" HorizontalOptions="CenterAndExpand" Margin="0,100,0,0">
                 <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                     <StackLayout Orientation="Horizontal">
                         <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                            <Image Source="usericon.png" Aspect="AspectFill" Margin="0"/>
+                            <Image Source="{x:Static y:Icons.Loginuser}" Aspect="AspectFill" Margin="0"/>
                         </Frame>
                         <Entry Text="{Binding UserName}" Placeholder="Username" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                     </StackLayout>
@@ -48,30 +58,43 @@
                 <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Margin="0,15,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
                     <StackLayout Orientation="Horizontal">
                         <Frame BackgroundColor="SkyBlue" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
-                            <Image Source="passwordicon.png" Aspect="AspectFill" Margin="0"/>
+                            <Image Source="{x:Static y:Icons.Loginpwd}" Aspect="AspectFill" Margin="0"/>
                         </Frame>
                         <Entry Text="{Binding PassWord}" IsPassword="True" Placeholder="Password" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                     </StackLayout>
                 </Frame>
 
+                <Frame BackgroundColor="Transparent" BorderColor="LightGreen" HeightRequest="40" Margin="0,15,0,0" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                    <StackLayout Margin="15,0,0,0" Padding="0" >
+                        <Picker ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" IsVisible="True"/>
+                    </StackLayout>
+                </Frame>
+
                 <StackLayout Orientation="Horizontal" Margin="0,10,0,0" Padding="0">
-                    <CheckBox IsChecked="False"/>
-                    <Label Text="Remember Me" TextColor="DarkGray" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                    <Label Text="Forgot Password" TextColor="#1D8348" FontAttributes="Bold" HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <CheckBox IsChecked="{Binding IsChecked}"/>
+                    <Label Text="Remember Me"  TextColor="DarkGray" FontSize="Small" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Label Text="Clear" TextColor="#1D8348" FontAttributes="Bold" HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ClearCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
                 </StackLayout>
 
-                <Button Text="Sign In" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" Command="{Binding LoginCommand}" />
-                <Button Text="SIGN IN" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding UserLoginCommand}"/>
+                <!--<Button Text="Sign In" BackgroundColor="#58D68D" TextColor="White" WidthRequest="100" CornerRadius="20"  Command="{Binding LoginCommand}" />-->
+                <Button Text="SIGN IN" BackgroundColor="#58D68D" TextColor="White" FontAttributes="Bold" CornerRadius="30" HorizontalOptions="Center" WidthRequest="200" Margin="0,15,0,0" Command="{Binding UserLoginCommand}"/>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,60,0,0" Padding="0" >
                     <Label Text="New User?" TextColor="DarkGray" FontSize="Small"/>
                     <Label Text=" Sign Up" TextColor="#1D8348" FontAttributes="Bold" FontSize="Small"/>
                 </StackLayout>
-
             </StackLayout>
         </Grid>
 
+        <Grid Grid.Row="2">
+            <StackLayout  Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Label Text="Copyright © 2017-2019 Macnica Cytech"  TextColor="DarkGray" FontSize="Small"/>
+            </StackLayout>
+        </Grid>
     </Grid>
-
 
 </ContentPage>

@@ -20,6 +20,10 @@ namespace WMSFrontEnd
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> HelloWorldAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/构造JSON返回", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<WMSFrontEnd.构造JSON返回1> AAGetXmlByJsonAsync(WMSFrontEnd.构造JSON返回 request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/validatePassword", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> validatePasswordAsync(string instance, string userName, string password);
@@ -27,6 +31,10 @@ namespace WMSFrontEnd
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getPassword", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> getPasswordAsync(string instance, string userName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AA", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<string> AAAsync(string instance, string userName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getUserInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -432,10 +440,38 @@ namespace WMSFrontEnd
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getAddedMiscinPutawayRecord", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<WMSFrontEnd.getAddedMiscinPutawayRecordResponseGetAddedMiscinPutawayRecordResult> getAddedMiscinPutawayRecordAsync(string instance, int transactionID, int userID);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="构造JSON返回", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class 构造JSON返回
+    {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/HardieBaoCreateNewMethod", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<WMSFrontEnd.HardieBaoCreateNewMethodResponseHardieBaoCreateNewMethodResult> HardieBaoCreateNewMethodAsync(string instance, int transactionID, int userID);
+        public 构造JSON返回()
+        {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="构造JSON返回Response", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class 构造JSON返回1
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string 构造JSON返回Result;
+        
+        public 构造JSON返回1()
+        {
+        }
+        
+        public 构造JSON返回1(string 构造JSON返回Result)
+        {
+            this.构造JSON返回Result = 构造JSON返回Result;
+        }
     }
     
     /// <remarks/>
@@ -2606,46 +2642,6 @@ namespace WMSFrontEnd
         }
     }
     
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class HardieBaoCreateNewMethodResponseHardieBaoCreateNewMethodResult
-    {
-        
-        private System.Xml.XmlElement[] anyField;
-        
-        private System.Xml.XmlElement any1Field;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.w3.org/2001/XMLSchema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get
-            {
-                return this.anyField;
-            }
-            set
-            {
-                this.anyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="urn:schemas-microsoft-com:xml-diffgram-v1", Order=1)]
-        public System.Xml.XmlElement Any1
-        {
-            get
-            {
-                return this.any1Field;
-            }
-            set
-            {
-                this.any1Field = value;
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     public interface WMSFrontEndSoapChannel : WMSFrontEnd.WMSFrontEndSoap, System.ServiceModel.IClientChannel
     {
@@ -2694,6 +2690,18 @@ namespace WMSFrontEnd
             return base.Channel.HelloWorldAsync();
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WMSFrontEnd.构造JSON返回1> WMSFrontEnd.WMSFrontEndSoap.AAGetXmlByJsonAsync(WMSFrontEnd.构造JSON返回 request)
+        {
+            return base.Channel.AAGetXmlByJsonAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WMSFrontEnd.构造JSON返回1> AAGetXmlByJsonAsync()
+        {
+            WMSFrontEnd.构造JSON返回 inValue = new WMSFrontEnd.构造JSON返回();
+            return ((WMSFrontEnd.WMSFrontEndSoap)(this)).AAGetXmlByJsonAsync(inValue);
+        }
+        
         public System.Threading.Tasks.Task<string> validatePasswordAsync(string instance, string userName, string password)
         {
             return base.Channel.validatePasswordAsync(instance, userName, password);
@@ -2702,6 +2710,11 @@ namespace WMSFrontEnd
         public System.Threading.Tasks.Task<string> getPasswordAsync(string instance, string userName)
         {
             return base.Channel.getPasswordAsync(instance, userName);
+        }
+        
+        public System.Threading.Tasks.Task<string> AAAsync(string instance, string userName)
+        {
+            return base.Channel.AAAsync(instance, userName);
         }
         
         public System.Threading.Tasks.Task<WMSFrontEnd.ArrayOfXElement> getUserInfoAsync(string instance, string userName)
@@ -3198,11 +3211,6 @@ namespace WMSFrontEnd
             return base.Channel.getAddedMiscinPutawayRecordAsync(instance, transactionID, userID);
         }
         
-        public System.Threading.Tasks.Task<WMSFrontEnd.HardieBaoCreateNewMethodResponseHardieBaoCreateNewMethodResult> HardieBaoCreateNewMethodAsync(string instance, int transactionID, int userID)
-        {
-            return base.Channel.HardieBaoCreateNewMethodAsync(instance, transactionID, userID);
-        }
-        
         public virtual System.Threading.Tasks.Task OpenAsync()
         {
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
@@ -3239,11 +3247,11 @@ namespace WMSFrontEnd
         {
             if ((endpointConfiguration == EndpointConfiguration.WMSFrontEndSoap))
             {
-                return new System.ServiceModel.EndpointAddress("http://172.29.112.1:8066/WMSFrontEnd.asmx");
+                return new System.ServiceModel.EndpointAddress("http://10.0.108.183:8066/WMSFrontEnd.asmx");
             }
             if ((endpointConfiguration == EndpointConfiguration.WMSFrontEndSoap12))
             {
-                return new System.ServiceModel.EndpointAddress("http://172.29.112.1:8066/WMSFrontEnd.asmx");
+                return new System.ServiceModel.EndpointAddress("http://10.0.108.183:8066/WMSFrontEnd.asmx");
             }
             throw new System.InvalidOperationException(string.Format("找不到名称为“{0}”的终结点。", endpointConfiguration));
         }

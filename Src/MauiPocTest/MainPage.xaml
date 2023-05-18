@@ -1,26 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:y="clr-namespace:MauiPocTest.BaseModel"
              xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
-             xmlns:vm ="clr-namespace:Comm.Net.ViewModels.Login;assembly=Comm.Net.ViewModels"
-             BindingContext="{vm:LoginViewModel}"
+             BindingContext="{Binding mainPageViewModel, Source={StaticResource StaticLocator}}"
              x:Class="MauiPocTest.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-            <Entry Text="{Binding UserName}" ></Entry>
+    <StackLayout BackgroundColor="#FF2C3E50">
+        <!--<Label Text="Welcome" FontSize="36" TextColor="White"  HorizontalOptions="Center" />-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-            <Entry Text="{Binding UserName }"/>
-
-            <Label Text="{Binding UserName}" />
-            <Button Text="Click Me!" Command="{Binding UserLoginCommand}"></Button>
-            <Button Text="Click" Clicked="Button_Clicked"></Button>
-            
-            <Button Text="Go to Page Two" Command="{Binding GoToPageTwoCommand}" />
-        </VerticalStackLayout>
-    </ScrollView>
+            <ImageButton Command="{Binding GoToUnloadMainPageCommand}" Grid.Row="0" Grid.Column="0" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding GoToPutAwayMainPageCommand}" Grid.Row="0" Grid.Column="1" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding GoToRmaUnloadMainPageCommand}" Grid.Row="0" Grid.Column="2" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <ImageButton Command="{Binding GoToRmaPutAwayMainPageCommand}" Grid.Row="0" Grid.Column="3" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="1" Grid.Column="0" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="1" Grid.Column="1" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="1" Grid.Column="2" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="1" Grid.Column="3" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="2" Grid.Column="0" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="2" Grid.Column="1" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="2" Grid.Column="2" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="2" Grid.Column="3" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="3" Grid.Column="0" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="3" Grid.Column="1" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="3" Grid.Column="2" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="3" Grid.Column="3" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="4" Grid.Column="0" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="4" Grid.Column="1" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="4" Grid.Column="2" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+            <ImageButton Command="{Binding UploadCommand}" Grid.Row="4" Grid.Column="3" Source="{x:Static y:Icons.ONE}" HorizontalOptions="Center" VerticalOptions="Center" />
+        </Grid>
+        <Label Text="© 2021 Your Company" FontSize="14" TextColor="White" HorizontalOptions="Center"  />
+    </StackLayout>
 
 </ContentPage>

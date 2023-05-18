@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm ="clr-namespace:Comm.Net.ViewModels.Inventory.RmaUnload;assembly=Comm.Net.ViewModels"
+             x:Class="MauiPocTest.Views.Inventory.RmaUnload.RmaUnloadMainIndex"
+             BindingContext="{vm:RmaUnloadMainViewModel}"
+             Shell.NavBarIsVisible="True"
+             Title="RmaUnloadMainIndex">
+    
+    <VerticalStackLayout>
+        <Label 
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+    
+</ContentPage>

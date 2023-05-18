@@ -8,6 +8,7 @@ namespace Comm.Net.Models.Login
         public string? Instance { get; set; }
 
         public string? UserName { get; set; }
+        public string? PassWord { get; set; }
 
         public int IO { get; set; }
         public int lineID { get; set; }

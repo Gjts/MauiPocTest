@@ -4,7 +4,11 @@ using Comm.Net.Models.User;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ITransformation;
+using LocalStorage;
 using MauiPocUnit;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using NLog;
 using Transformation;
 using Transformation.WMSFrontEndSoapTran;
 using LoginNS = Comm.Net.Models.Login;
@@ -40,9 +44,23 @@ public partial class LoginViewModel : ObservableObject
 
     //private RelayCommand relayCommand;
     //public RelayCommand RelayCommand =>
-    //    relayCommand ??= new RelayCommand(() => UserName = "11111111111111");
+    //relayCommand ??= new RelayCommand(() => UserName = "11111111111111");
+
+    //private string _selectedColor;
+
+    //public List<string> Colors { get; set; } = new List<string>
+    //    {
+    //        "Red", "Green", "Blue"
+    //    };
+
+    //public string SelectedColor
+    //{
+    //    get => _selectedColor;
+    //    set => SetProperty(ref _selectedColor, value);
+    //}
     #endregion
 
+#nullable enable
     [ObservableProperty]
     private string? userName;
 
@@ -53,13 +71,22 @@ public partial class LoginViewModel : ObservableObject
     private string? loginEnvironment;
 
     [ObservableProperty]
-    private string? versionNum;
+    private string? versionNum = "1.7";
 
     [ObservableProperty]
     private string? instance;
 
     [ObservableProperty]
-    private string? isLogin;
+    private bool isChecked = InitLogin().Item1;
+
+    [ObservableProperty]
+    private string selectedItem = InitLogin().Item2;
+
+    [ObservableProperty]
+    public List<string> items;
+#nullable disable
+
+    private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
     public IWMSFePISoapTran<LoginNS.Login, UserInfo> wMSFePI;
 
@@ -72,6 +99,7 @@ public partial class LoginViewModel : ObservableObject
         wMSFePI = new WMSFePISoapTran();
         wMSFrontEnd = new WMSFrontEndSoapTran();
         dialogService = new DialogService();
+        Items = new List<string> { "UAT", "FUAT", "Item 3" };
     }
 
     public async void dialogShow(DialogModel dialog)
@@ -80,22 +108,11 @@ public partial class LoginViewModel : ObservableObject
         return;
     }
 
-    private string _selectedColor;
-
-    public List<string> Colors { get; set; } = new List<string>
-        {
-            "Red", "Green", "Blue"
-        };
-
-    public string SelectedColor
-    {
-        get => _selectedColor;
-        set => SetProperty(ref _selectedColor, value);
-    }
-    
     [RelayCommand]
     public async void UserLogin()
     {
+        // 保存当前版本号
+        // SrorageSingleton.Instance.Set("PDAVersion", VersionTracking.Default.CurrentVersion);
         var dialog = new DialogModel();
         dialog.Title = "Alter";
         dialog.ButtonLabel = "OK";
@@ -106,7 +123,7 @@ public partial class LoginViewModel : ObservableObject
         }
 
         var login = new LoginNS.Login();
-        login.Instance = "UAT";
+        login.Instance = SelectedItem;
         login.UserName = UserName;
         try
         {
@@ -114,28 +131,66 @@ public partial class LoginViewModel : ObservableObject
             if (curVersion != VersionNum)
             {
                 dialog.Message = "Current version is not updated";
-                return;
+                dialogShow(dialog);
             }
 
-            string password = await wMSFrontEnd.getPasswordAsync(login);
-            if (password != null && password.ToUpper().Equals(PassWord.ToUpper()))
+            login.PassWord = await wMSFrontEnd.getPasswordAsync(login);
+            if (login.PassWord != null && login.PassWord.ToUpper().Equals(PassWord.ToUpper()))
             {
                 DataTable dt = new DataTable();
                 var userInfo = wMSFrontEnd.getUserInfoAsync(login);
+
+                //选中Remember 保存当前登录人信息
+                if (IsChecked)
+                {
+                    SrorageSingleton.Instance.Set("CurrUserInfo", JsonConvert.SerializeObject(login));
+                }
             }
             else
             {
                 dialog.Message = "Please enter the correct password.";
+                dialogShow(dialog);
             }
         }
         catch (Exception ex)
         {
             dialog.Message = "Cannot connect to internet.";
+            dialogShow(dialog);
         }
 
-        dialog.Message = "Please enter the correct password.";
-        dialog.Title = "ASucessfal Login";
-        dialog.ButtonLabel = "OK";
-        dialogShow(dialog);
+        //选中Remember 保存当前登录人信息
+        if (IsChecked)
+        {
+            SrorageSingleton.Instance.Set("CurrUserInfo", JsonConvert.SerializeObject(login));
+        }
+
+        await Shell.Current.GoToAsync($"//MainPage");
+    }
+
+    [RelayCommand]
+    public void Clear()
+    {
+        UserName = string.Empty;
+        PassWord = string.Empty;
+        IsChecked = false;
+        SrorageSingleton.Instance.Remove("CurrUserInfo");
+    }
+
+    /// <summary>
+    /// 初始化登录
+    /// </summary>
+    /// <returns></returns>
+    private static Tuple<bool, string> InitLogin()
+    {
+        if (string.IsNullOrWhiteSpace(SrorageSingleton.Instance.Get("CurrUserInfo", "")))
+        {
+            JObject jObject = JObject.Parse(SrorageSingleton.Instance.Get("CurrUserInfo", ""));
+            string instance = (string)jObject["Instance"];
+            var resTup = new Tuple<bool, string>(true, instance);
+
+            return resTup;
+        }
+
+        return new Tuple<bool, string>(false, "UAT");
     }
 }

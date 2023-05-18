@@ -3,26 +3,62 @@
     x:Class="MauiPocTest.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:y="clr-namespace:Comm.Net.Enums;assembly=Comm.Net.Enums"
+    xmlns:y="clr-namespace:MauiPocTest.BaseModel"
     xmlns:local="clr-namespace:MauiPocTest"
     xmlns:loginPage="clr-namespace:MauiPocTest.Views.Login"
     xmlns:views="clr-namespace:MauiPocTest.Views.Layout"
     xmlns:models="clr-namespace:Comm.Net.Models.Login;assembly=Comm.Net.Models"
-    Shell.TabBarIsVisible="False">
+    Shell.TabBarIsVisible="True">
 
+    <!--初始页面-->
+    <ShellContent 
+        FlyoutItemIsVisible="False" 
+        Shell.FlyoutBehavior="Disabled"
+        ContentTemplate="{DataTemplate loginPage:LoadingPage}" 
+        Route="LoadingPage" />
+    
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate loginPage:LoginPage}"
         FlyoutItemIsVisible="False"
         Shell.FlyoutBehavior="Disabled"
+        Shell.TabBarIsVisible="False"
         Route="LoginPage" />
 
+    <!--侧边栏菜单-->
     <FlyoutItem Route="HomePage" FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Home" Icon="{x:Static y:Icons.Dashboard}" ContentTemplate="{DataTemplate views:HomePage}"/>
+        <!--主页面-->
+        <ShellContent Title="MainPage" Route="MainPage" Icon="{x:Static y:Icons.Main}" ContentTemplate="{DataTemplate local:MainPage}"/>
         <ShellContent Title="Contact" Icon="{x:Static y:Icons.ContactUs}" ContentTemplate="{DataTemplate views:ContactPage}"/>
         <ShellContent Title="About" Icon="{x:Static y:Icons.AboutUs}" ContentTemplate="{DataTemplate views:AboutPage}"/>
     </FlyoutItem>
 
+    <!--注册隐藏全局路由-->
+    <!--<ShellContent Title="MainPage" Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}"/>-->
+
+    <!--底部导航选项卡-->
+    <TabBar>
+        <Tab Title="Home">
+            <ShellContent Route="monkeys"
+                      Title="Monkeys"
+                      Icon="{x:Static y:Icons.Home}"
+                      ContentTemplate="{DataTemplate local:MainPage}"/>
+        </Tab>
+        <Tab Title="Tab 2">
+            <ShellContent Route="elephants"
+                      Title="Elephants"
+                      Icon="{x:Static y:Icons.ContactUs}"
+                      ContentTemplate="{DataTemplate local:MainPage}"/>
+        </Tab>
+        <Tab Title="Tab 2">
+            <ShellContent Route="bears"
+                      Title="Bears"
+                      Icon="{x:Static y:Icons.AboutUs}"
+                      ContentTemplate="{DataTemplate local:MainPage}"/>
+        </Tab>
+    </TabBar>
+
+    <!--侧边栏底部-->
     <Shell.FlyoutFooter>
         <StackLayout Padding="20">
             <Button Text="Sign Out" Command="{Binding SignOutCommand}" BackgroundColor="#1D8348"/>

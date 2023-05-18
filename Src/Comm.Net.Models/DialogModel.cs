@@ -26,5 +26,5 @@ public class DialogModel
     /// 取消按钮文本
     /// </summary>
     public string CancelButtonLabel { get; set; }
-    
+
 }
